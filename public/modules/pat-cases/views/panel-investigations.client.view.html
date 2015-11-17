@@ -1,0 +1,138 @@
+<section>
+
+    <div class="panel-default investigation-panel" ng-show="!newInv && omimSearch === 'empty'">
+        <div class="panel-heading"><h4>Case Details</h4></div>
+        <div class="panel-body">
+            <div class="col-lg-7">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>Created by</td>
+                            <td>{{currentCase.user.displayName}}</td>
+                        </tr>
+                        <tr>
+                            <td>Created on</td>
+                            <td>{{currentCase.created| date:'medium'}}</td>
+                        </tr>
+                        <tr>
+                            <td>Patient</td>
+                            <td>{{currentCase.patient_id.pat_name}}</td>
+                        </tr>
+                    </tbody>              
+                </table>
+                <button type="button" class="btn btn-default col-md-offset-3"  ng-click="setNewInv();
+                    clearNewInv()">New Investigation</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-default investigation-panel" ng-show="newInv === 'createInv' && omimSearch === 'empty'">
+
+
+        <div class="panel-heading"><h4>New Investigation</h4></div>
+        <div class="panel-body">
+
+
+            <div class="input-group" ng-show="newInvSections.length === 0">
+                <span class="input-group-addon">Investigation Name</span>
+                <input type="text" class="form-control" placeholder="Enter Investigation Name..." ng-model="inv_name"  ng-keypress="pressEnter($event, inv_name, inv_phenotype, inv_genes, currentCase._id)" />
+            </div>
+            <div class="input-group" ng-show="newInvSections.length === 1">
+                <span class="input-group-addon">Phenotype or gene</span>
+                <input  class="form-control" placeholder="Enter Phenotype or Gene..." type="text" ng-model="inv_phenotype"  ng-keypress="pressEnter($event, inv_name, inv_phenotype, inv_genes, currentCase._id)"/>
+            </div>
+            <div class="input-group" ng-show="newInvSections.length === 2" style="width:100%">
+                <table class="table" style="width:100%">
+                    <tbody>
+                        <tr>
+                            <td>Investigation name</td>
+                            <td>{{inv_name}}</td>
+                        </tr>
+                        <tr>
+                            <td>Phenotype</td>
+                            <td>{{inv_phenotype}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <span class="label label-danger">{{warning}}</span>
+
+
+            <div class="row">
+                <div class ="btn-group col-lg-12">
+                    <button type="button" class="btn btn-default col-lg-6" ng-click="barBack()">Previous</button>
+                    <button type="button" class="btn btn-default col-lg-6" ng-click="popNext(inv_name, inv_phenotype, inv_genes, currentCase._id);
+                        createInv(newInvestigation, currentCase._id, finish)">{{button}}</button>
+                </div>
+            </div>
+            <div class="rowm">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="3" style="width: {{progressBar}}">
+                        <span class="sr-only">20% Complete</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="panel-default investigation-panel" ng-show="omimSearch !== 'empty'">
+
+        <div class="panel-heading"><h4>Search OMIM</h4></div>
+        <div class="panel-body">
+
+            <form onsubmit=''>
+                <p><b>Online Mendelian Inheritance in Man</b></p>
+                <p>An Online Catalog of Human Genes and Genetic Disorders</p>
+                <input class="popup-input-text" type="text" ng-model="omim_search"/>
+                <input type='submit'>
+            </form>
+        </div>
+    </div>
+
+
+    <div ng-show="newInv === 'invInfo' && omimSearch === 'empty'">
+
+        <div class="panel-default investigation-panel" ng-show="!overview || searching">
+            <div class="panel-heading"><h4>Edit Investigation</h4></div>
+            <div class="panel-body">
+
+                <p>Overview: {{inv_phenotype}}</p>
+
+                <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...
+            </div>
+        </div>
+
+        <div class="panel-default investigation-panel" ng-show="overview">
+
+            <div class="panel-heading"><h4>Edit Investigation</h4></div>
+            <div class="panel-body">
+
+                <div class="input-group">
+                    <span class="input-group-addon">Phenotype or gene</span>
+                    <input  class="form-control" placeholder="Enter Phenotype..." type="text" ng-model="phen" ng-keypress="">
+                    <span class="input-group-btn"><button class="btn btn-default" type="button" ng-click="addPheno(phen);">Add</button></span>
+                </div>
+
+                <table class="table" style="width:100%">
+                    <tbody>
+                        <tr>
+                            <td>Overview</td>
+                            <td>{{overview.omim.phenotype}}</td>
+                        </tr>
+                        <tr>
+                            <td>Omim results</td>
+                            <td>{{overview.omim.omim_size}} gene(s) matched from the phenotype {{overview.omim.phenotype}}</td>
+                        </tr>
+                        <tr>
+                            <td>Variant intersection</td>
+                            <td>{{overview.pat_var.variants.length}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <show-data data="{{overview.clinvar.clin_results.green.length}},{{overview.clinvar.clin_results.amber.length}},{{overview.clinvar.clin_results.red.length}}"></show-data>
+            </div>
+        </div>
+    </div>
+</section>

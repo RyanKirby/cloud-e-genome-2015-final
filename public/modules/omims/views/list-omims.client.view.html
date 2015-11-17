@@ -1,0 +1,19 @@
+<section data-ng-controller="OmimsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Omims</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="omim in omims" data-ng-href="#!/omims/{{omim._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="omim.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="omim.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="omim.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!omims.$resolved || omims.length">
+    	No Omims yet, why don't you <a href="/#!/omims/create">create one</a>?
+    </div>
+</section>

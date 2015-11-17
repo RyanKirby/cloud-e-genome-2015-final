@@ -1,0 +1,37 @@
+<section>
+    <ul class="nav nav-justified">
+        <li><a href="" ng-click="invSubOpt(0)"><i class="glyphicon glyphicon-info-sign"></i></a></li>
+        <li><a href="" ng-click="invSubOpt(1)"><i class="glyphicon glyphicon-option-horizontal"></i></a></li>
+        <li><a href="" ng-click="deleteInv(currentInvestigation._id, currentCase._id)" ><i class="glyphicon glyphicon-trash"></i></a></li>
+    </ul>  
+    <ul ng-if="inSub[1]" class="nav nav-stacked">
+        <li> <a href="" ng-click="getOmim(variant.IA_OMIMLink);
+            omimSelected(true);
+            selectPanel(1)">OMIM</a></li>
+<!--        <li> <a href="" ng-click="selectPanel(2)">ClinVar</a></li>
+        <li> <a href="" ng-click="omimSelected(false);
+            selectPanel(3)"> HPO</a></li>-->
+    </ul>
+
+    <div class="panel-default" ng-show="inSub[0]">
+        <h4>Variant Overview</h4>
+        <div ng-if="variant === 'empty'">
+            <p>Please select a variant from the edit page</p>
+        </div>
+        <div class="panel-body" 
+             ng-show="variant !== 'empty'">
+                <p><span><b>Start:</b> {{variant.Start}}</span><span>, <b>Func:</b> {{variant.Func_knownGene}}</span></p>
+                <p><span><b>Gene:</b>{{variant.Gene_knownGene}}</span><span>, <b>ExonicFunc:</b> {{variant.ExonicFunc_knownGene}}</span></p>
+                <p><b>Maf:</b> {{variant.maf_1000g2012apr_all}}</p>
+                <p ng-show="clinvarVar"><b>Clinvar:</b> {{clinvarVar[0].ClinicalSignificance}}</p>
+            </div>
+        </div>
+
+
+        <div class="btn-group btn-group-justified animate-if" ng-if="currentInvestigation.inv_name">
+            <a href="" ng-click="updateInv(currentInvestigation, variants)" class="btn btn-info col-sm-3">
+                <i class="glyphicon glyphicon-floppy-disk"></i><br>
+                Update {{currentInvestigation.inv_name}}
+            </a>
+        </div>
+</section>

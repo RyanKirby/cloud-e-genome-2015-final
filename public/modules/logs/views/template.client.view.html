@@ -1,0 +1,45 @@
+<section data-ng-controller="LogsController">
+
+    <div class="container" data-ng-init="find()">
+
+        <!-- upper section -->
+        <div class="row"> 
+            <div class="col-sm-2">
+                <!-- sidebar left -->
+                <h3><i class="glyphicon glyphicon-briefcase"></i> Toolbox</h3>
+                <hr>
+                <section ng-include="'modules/logs/views/toolbox.client.view.html'"></section>
+            </div>
+
+            <div class="col-sm-10">
+                <!-- Dashboard -->	
+                <h3><i class="glyphicon glyphicon-dashboard"></i> Dashboard</h3>  
+                <hr>
+
+                <div class="row">
+                    <!-- Main section-->	
+                    <div class="col-md-8">
+                        <div class="panel">
+                            <section ng-include="'modules/logs/views/panel.client.view.html'"></section>
+                        </div>
+                    </div>
+
+                    <!--options-right-->
+                    <div class="col-md-4">
+                        <section ng-include="'modules/logs/views/options.client.view.html'"></section>
+                    </div><!--/col-span-6-->
+
+                </div>
+            </div>
+        </div>
+
+        <!-- lower section -->
+        <div class="row">
+            <section ng-include="'modules/logs/views/lower-section.client.view.html'"></section>
+        </div>
+
+    </div>
+
+    <footer class="text-center">Newcastle University, Cloud e-Genome Project 2015</footer>
+
+</section>

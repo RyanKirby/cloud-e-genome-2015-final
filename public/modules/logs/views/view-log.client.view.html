@@ -1,0 +1,14 @@
+<section data-ng-controller="LogsController" data-ng-init="findOne()">
+
+    <button ng-click="provSvg(log)">ProvJS SVG</button>
+    <button ng-click="update1()">update</button>
+
+    <button ng-click="provN(log)">ProvJS ProvN</button>
+    <button ng-click="update2()">update</button>
+
+
+    <div ng-bind-html="provjSvgData"></div>
+
+    {{provjProvData}}
+
+</section>

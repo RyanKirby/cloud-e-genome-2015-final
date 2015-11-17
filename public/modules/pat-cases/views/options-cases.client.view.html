@@ -1,0 +1,36 @@
+<section>
+    <ul class="nav nav-justified">
+<!--        <li><a href=""><i class="glyphicon glyphicon-info-sign"></i></a></li>
+        <li><a href=""><i class="glyphicon glyphicon-comment"></i></a></li>-->
+        <li><a href="" ng-click="deleteCase(currentCase)" ><i class="glyphicon glyphicon-trash"></i></a></li>
+    </ul>  
+
+
+    <div ng-if="currentCase">
+        <h4>{{currentCase.case_name}}</h4>
+        <p>Created by {{currentCase.user.displayName}} on the {{currentCase.created | date:default}}</p>
+        <p>Patient: {{currentCase.patient_id.pat_name}}</p>
+        
+        
+        
+    </div>
+    
+    <div ng-if="!currentCase">
+        Please select or create a case to start/edit investigation(s) for a patient.
+    </div>
+
+    <hr>
+
+    <div class="btn-group btn-group-justified">
+        <a href="" ng-click="newCaseFunc(true);" class="btn btn-info col-sm-3">
+            <i class="glyphicon glyphicon-plus"></i><br>
+            Create Case
+        </a>
+        <a href="" ng-click="listInv(currentCase);getCaseInvs(currentCase);viewCase(true)" class="btn btn-info col-sm-3">
+            <i class="glyphicon glyphicon-folder-open" ></i><br>
+            Go to Case
+        </a>
+    </div>
+
+
+</section>

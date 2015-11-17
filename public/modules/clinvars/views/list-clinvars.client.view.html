@@ -1,0 +1,19 @@
+<section data-ng-controller="ClinvarsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Clinvars</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="clinvar in clinvars" data-ng-href="#!/clinvars/{{clinvar._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="clinvar.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="clinvar.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="clinvar.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!clinvars.$resolved || clinvars.length">
+    	No Clinvars yet, why don't you <a href="/#!/clinvars/create">create one</a>?
+    </div>
+</section>

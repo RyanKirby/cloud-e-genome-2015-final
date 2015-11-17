@@ -1,0 +1,104 @@
+<section>
+
+    <div class="col-md-12">
+        <hr>
+        <a href="#"><strong><i class="glyphicon glyphicon-list-alt"></i> Reports</strong></a>  
+        <hr>    
+    </div>
+
+
+    <div class="row">
+
+
+        <div class="col-md-2" ng-init="getInvs()">
+
+            <div ng-repeat="inv in investigations" ng-click="selectInv(inv)">
+                <p>{{inv.inv_name}}</p>
+                <p>{{inv.info.phenotype}}</p>
+            </div>
+
+        </div>
+
+        <div class="col-md-10">
+
+            <div class="row">
+                <div ng-repeat="result in searchLog">
+
+
+                    <div class="col-md-3 box" ng-click="updateData(result.data)">
+                        <h2>{{result.type}}</h2>
+                        <p>{{result.name}}</p>
+                        <p>{{result.info}}</p>
+                    </div>
+
+
+
+                </div>
+
+                <div ng-if="search === 'vrt'" class="col-md-3 box">
+                    <button ng-click="findAllInv(variant)" class="btn btn-default">find all investigations</button>               
+                    <button ng-click="findInvGene(variant)" class="btn btn-default">find investigation by Gene</button>               
+                
+                </div>
+                
+                <div ng-if="search === 'case'" class="col-md-3 box">
+                    
+                    {{patCase}}
+                    
+                    <button ng-click="selectPatCase(patCase)" class="btn btn-default">select</button>               
+                </div>
+
+                <div ng-if="search === 'inv'" class="col-md-3 box">
+                    <button ng-click="findVar(investigation.omim_variant_ids)" class="btn btn-default">find variants</button>               
+                    <button ng-click="findCase(investigation.pat_case_id)" class="btn btn-default">find case</button>
+                    <button ng-click="findPheno(investigation.inf.phenotype)" class="btn btn-default">find phenotypes</button>
+                    
+
+                </div>
+                
+                <div ng-if="search === 'case-search'" class="col-md-3 box">
+                    <button ng-click="findVar(investigation.omim_variant_ids)" class="btn btn-default">find variants</button>               
+                    <button ng-click="findCase(investigation.pat_case_id)" class="btn btn-default">find case</button>
+                    <button ng-click="findPheno(investigation.inf.phenotype)" class="btn btn-default">find phenotypes</button>
+                    
+
+                </div>
+
+                <div ng-if="search === 'varResults'" class="col-md-3 box">
+                    <p ng-repeat="vrt in variants" ng-click="selectVrt(vrt)">
+                        {{vrt.Start}}, {{vrt.Gene_knownGene}}
+                    </p>
+
+                </div>
+                
+                <div class="col-md-12 box">
+                    {{data}}
+                </div>
+                    
+
+            </div>
+
+            
+            <div>
+                {{searchLog}}
+       
+                
+                <button ng-click="provSvg( , 3)">1</button>
+                
+                 <button ng-click="update1()">1</button>
+        
+        
+        
+            {{provjSvgData}}
+                {{provjProvData}}
+                
+            </div>
+
+
+
+
+
+        </div>
+
+
+</section>

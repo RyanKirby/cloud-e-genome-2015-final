@@ -1,0 +1,13 @@
+<section ng-init="getNts()" class="nts">
+    <div ng-repeat="note in nts">
+        <div class="row">
+            <div class="col-md-12">
+                <span> {{note.title}} by {{note.user.user.displayName}}</span>
+            </div>
+            <div class="col-md-12" ng-if="note.details.variant_id">
+                <small> Variant : {{note.details.variant_id}}</small>
+            </div>
+        </div>
+        <hr>
+    </div>
+</section>

@@ -1,0 +1,50 @@
+<section>
+    <div class="panel-default">
+        <div class="panel-heading"><h4>Logs</h4></div>
+        <div class="panel-body">
+
+
+            <div ng-if="log && !searchLogs">
+                <p><b>{{log.action.info}}</b></p>
+                <p>Created by, {{log.user.displayName}} on the {{log.time_stamp| date:'medium'}}</p>
+                <p>Patient id : {{log.patient_id}} - Case id: {{log.case_id}}</p>
+                {{log}}
+
+            </div>
+            <div ng-if="searchLogs">
+                <p>Variant Search</p>
+                <small>A search that will find all logs which are associated with the search variant. Please enter a variant ID.</small>
+
+                <div class="input-group">     
+
+                    <input class="form-control" type="test" placeholder="Enter variant id..." ng-model="searchLogVariant" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" ng-click="variantCrossSearch(searchLogVariant)">Submit</button>
+                    </span>
+                </div>
+
+                <p>Gene Search</p>
+                <small>A search that will find all logs which are associated with the search gene. Please enter a gene.</small>
+
+                <div class="input-group">
+                    <input class="form-control" type="test" placeholder="Enter gene name..." ng-model="searchGeneVariant" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" ng-click="geneCrossSearch(searchGeneVariant)">Submit</button>
+                    </span>
+                </div>
+                <div ng-repeat="lg in logsRes">
+                    <p>id: {{lg.action.variant._id}}</p>
+                    <p>gene: {{lg.action.variant.gene}}</p>
+                    <p>Investigation: {{lg.action.investigation.title}}</p>
+                    <p>Phenotypes: {{lg.action.investigation.phenotypes}}</p>
+                    <p>Case: {{lg.action.patCase.name}}</p>
+                    
+                    <hr>
+                </div>
+
+            </div>
+
+
+        </div>
+
+</section>

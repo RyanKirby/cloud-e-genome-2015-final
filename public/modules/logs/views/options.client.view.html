@@ -1,0 +1,37 @@
+<section>
+    <ul class="nav nav-justified">
+        <li><a href="" ng-click="invSubOpt(0)"><i class="glyphicon glyphicon-info-sign"></i></a></li>
+        <li><a href="" ng-click="invSubOpt(1)"><i class="glyphicon glyphicon-option-horizontal"></i></a></li>
+        <li><a href="" ng-click="deleteInv(currentInvestigation._id, currentCase._id)" ><i class="glyphicon glyphicon-trash"></i></a></li>
+    </ul>  
+
+    <div class="panel-default">
+        <h4>Variant Overview</h4>
+        <div ng-if="log">
+            <p>Case</p>
+            <button ng-click="provSvg(log, 0)">ProvJS SVG</button>
+            <button ng-click="provN(log, 0)">ProvJS ProvN</button>
+
+            <p>Investigation</p>
+            <button ng-click="provSvg(log, 1)">ProvJS SVG</button>
+            <button ng-click="provN(log, 1)">ProvJS ProvN</button>
+            
+            <p>Variant</p>
+            <button ng-click="provSvg(log, 2)">ProvJS SVG</button>
+            <button ng-click="provN(log, 2)">ProvJS ProvN</button>
+            
+            <p>Update</p>
+            <button ng-click="update1()">update SVG</button>
+            <button ng-click="update2()">update ProvN</button>
+            
+        </div>
+    </div>
+
+
+    <div class="btn-group btn-group-justified animate-if">
+        <a href="" ng-click="updateInv(currentInvestigation, variants)" class="btn btn-info col-sm-3">
+            <i class="glyphicon glyphicon-floppy-disk"></i><br>
+            Update {{currentInvestigation.inv_name}}
+        </a>
+    </div>
+</section>

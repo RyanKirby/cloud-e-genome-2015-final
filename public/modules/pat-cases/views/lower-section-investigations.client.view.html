@@ -1,0 +1,169 @@
+<section>
+
+
+    <div class="col-md-12">
+        <hr>
+        <a href="#"><strong><i class="glyphicon glyphicon-list-alt"></i> Reports</strong></a>  
+        <hr>    
+    </div>
+
+    <div class="col-md-12">
+
+        <!--        Investigation Code-->
+        <div ng-show="panel[0]" class=" col-md-9">
+
+            <div class="list-group" ng-init="resetSelected(investigations.length)">
+                <h4>Investigations</h4>
+
+                <div data-ng-repeat="listInv in investigations" ng-click="selectInvestigation(listInv);
+                        selected($index, investigations.length);" class="list-group-item list-select {{selected[$index]}}" >
+
+                    <b><span data-ng-bind="listInv.inv_name"></span></b>, 
+                    <small class="list-group-item-text">
+                        created on
+                        <span data-ng-bind="listInv.created | date:'medium'"></span>
+                    </small>
+
+                    <div>
+                        <p> Phenotypes: {{listInv.info.phenotype}}</p>
+                    </div>
+
+                </div>
+            </div>  
+            <hr>              
+        </div>
+
+
+        <!--        Omim code-->
+        <div ng-show="panel[1]" class=" col-md-9"> 
+            <section ng-include="'modules/pat-cases/views/omim-api.client.view.html'"></section>
+        </div>
+
+        <!--        Results Table Code-->
+        <div ng-show="panel[4]" class=" col-md-9">
+            <section ng-include="'modules/pat-cases/views/results-table.client.view.html'"></section>
+        </div>
+
+        <!--        Variant code -->
+        <div ng-show="panel[5]"class="col-md-12">
+            <div class="row">
+
+                <div class="col-md-9">
+
+                    <div class="col-md-12 var var-var">
+                        <div class="col-md-6">
+                            <p><b>Gene: {{variant.Gene_knownGene}}</b></p>
+                            <p><b>Start: {{variant.Start}}</b></p>  
+                        </div>
+                        <div class="col-md-3">
+                            <p>MAF: {{variant.maf_1000g2012apr_all}}</p>
+                            <p>id: {{variant._id}}</p>
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="col-md-12 var">
+                        <div ng-repeat="lg in logsRes" class="col-md-3  var-results" ng-click="provSvg(lg, 2)">
+                            <p>id: <small>{{lg.action.variant._id}}</small></p>
+                            <p>gene: {{lg.action.variant.gene}}</p>
+                            <p>pos {{lg.action.variant.pos}}</p>
+                            <p>Investigation: {{lg.action.investigation.title}}</p>
+                            <p>Phenotypes: {{lg.action.investigation.phenotypes}}</p>
+                            <p>Case: {{lg.action.patCase.name}}</p>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-12 var var-options">
+                        <button class="button btn btn-default" ng-click="variantCrossSearch(variant.Gene_knownGene, variant.Start)">Search Variant</button>
+                        <button class="button btn btn-default" ng-click="geneCrossSearch(variant.Gene_knownGene)">Search Gene</button>  
+                        <button class="button btn btn-default" ng-click="logVariant(variant, currentCase, currentInvestigation, currentCase.patient_id.pat_id);
+                            searchLogFunc(true);
+                            varNot(variant._id, currentInvestigation._id, currentCase._id)">Log Variant</button>
+                        <button class="button btn btn-default"  ng-click="update1()">Provenance</button>
+                    </div>
+
+                </div>
+
+                <div class="col-md-3 var-side">
+
+                    <form>
+
+                        <div class="form-group">
+                            <p>Title</p>
+                            <div class="controls">
+                                <input name="title" type="text" class="form-control" placeholder="Title">
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <p>Notes/References/Conclusion</p>
+                            <div class="controls">
+                                <textarea name="content" id="content" class="form-control" cols="30" rows="10" placeholder="Content" required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="Update" class="btn btn-default">
+                        </div>
+
+                    </form>
+                </div>
+
+               
+                    <div ng-bind-html="provjSvgData"></div>
+              
+                
+            </div>
+
+
+
+            <section ng-include="'modules/pat-cases/views/omim-api.client.view.html'"></section>
+
+        </div>
+    </div>
+
+    <!--        Edit Investigation code -->
+    <div ng-show="panel[6]"class=" col-md-9">
+
+        <div class="row">
+
+
+            Edit investigation
+
+            {{currentInvestigation}}
+            <p>clinvar</p>
+            {{overview.clinvar.clin_results}}
+            <p>Variants</p>
+            {{displayedCollection}}
+
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="panel">
+            <div class="panel-default">
+                <div class="panel-heading"><h4>Phenotypes</h4></div>
+                <div class="panel-body">
+                    <p ng-repeat="phenotype in phenotypes">  
+                        <span class="dlt-pheno clickable" ng-click="removePheno($index)">{{phenotype}}</span>
+                    </p>
+                </div>
+            </div>
+        </div><!--/col-->
+
+        <div class="hpo-list">           
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="hpo in hpos" ng-click="addPheno(hpo.disease)">{{hpo.disease}}</li>
+            </ul>              
+        </div>
+
+    </div>
+
+    <hr>
+
+</section>

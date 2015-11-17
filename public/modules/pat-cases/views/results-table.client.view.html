@@ -1,0 +1,63 @@
+<section>
+	<div class="row">
+
+                <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+                    <thead>
+                        <tr><th st-sort="Patient">Patient</th>
+                            <th st-sort="Gene_knownGene">Gene</th>
+                            <th st-sort="Start">Start</th>
+                            <th st-sort="Func_knownGene">Exonic Func.</th>
+                            <th st-sort="maf_1000g2012apr_all">MAF</th>
+                        </tr>
+                        <tr>
+                            <th colspan="1">
+                                <input st-search="Gene_knownGene" placeholder="gene search..." class="input-sm form-control" type="search"/>
+                            </th>
+                            <th colspan="3">
+                                <input st-search class="input-sm form-control" placeholder="global search..." type="search"/>
+                            </th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="row in displayedCollection" ng-click="setVariant(row);
+                                setClinvarVariant(row.Gene_knownGene, row.Start)">
+                            <td>{{row.Patient}}</td>
+                            <td>{{row.Gene_knownGene}}</td>
+                            <td>{{row.Start}}</td>
+                            <td>{{row.Func_knownGene}}</td>
+                            <td>{{row.maf_1000g2012apr_all}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <td>Gene</td>
+                            <td>Start</td>
+                            <td>Clinical Significance</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="clinvar in overview.clinvar.clin_results.red| orderBy:'Gene_knownGene'" class="clinvar-red clinvar-{{clinvar.ClinicalSignificance}}">
+                            <td>{{clinvar.GeneSymbol}}</td>
+                            <td>{{clinvar.Start}}</td>
+                            <td>{{clinvar.ClinicalSignificance}}</td>
+                        </tr>
+                        <tr ng-repeat="clinvar in overview.clinvar.clin_results.amber| orderBy:'Gene_knownGene'" class="clinvar-amber clinvar-{{clinvar.ClinicalSignificance}}">
+                            <td>{{clinvar.GeneSymbol}}</td>
+                            <td>{{clinvar.Start}}</td>
+                            <td>{{clinvar.ClinicalSignificance}}</td>
+                        </tr>
+                        <tr ng-repeat="clinvar in overview.clinvar.clin_results.green| orderBy:'Gene_knownGene'" class="clinvar-green clinvar-{{clinvar.ClinicalSignificance}}">
+                            <td>{{clinvar.GeneSymbol}}</td>
+                            <td>{{clinvar.Start}}</td>
+                            <td>{{clinvar.ClinicalSignificance}}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+</section>

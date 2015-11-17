@@ -1,0 +1,84 @@
+<section>
+
+    <div ng-show="api === 'empty'">
+        <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...
+    </div>
+
+
+    <div ng-show="api && api !== 'noOmim'">
+
+        <h3>{{api.prefix}}{{api.mimNumber}}</h3>
+        <br/>
+        <h4 class="omim-h4">{{api.titles.preferredTitle}}</h4>
+        <p class="omim-h4"><i>{{api.titles.alternativeTitles}}</i></p>
+        <br/>
+
+        <p class="omim-h4"><i>HGNC Approved Gene Symbol:</i> {{api.geneMap.mouseGeneSymbol}}</p>
+        <p class="omim-h4">Cytogenetic location: <b>{{api.geneMap.computedCytoLocation}}</b> - Genomic coordinates: <b>{{api.geneMap.chromosome}}:{{api.geneMap.chromosomeLocationStart}}-{{api.geneMap.chromosomeLocationEnd}}</b></p>
+        <br/>
+
+        <p class="omim-h4"><b><i>Gene-Phenotype Relationships</i></b></p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Location</td>
+                    <td>Phenotype</td>
+                    <td>Phenotype MIM number</td>
+                    <td>Phenotype mapping key</td>
+                </tr>
+
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{api.geneMap.computedCytoLocation}}</td>
+                    <td><span ng-repeat="pheno in api.geneMap.phenotypeMapList">{{pheno.phenotypeMap.phenotype}}</span></td>
+                    <td><span ng-repeat="pheno in api.geneMap.phenotypeMapList">{{pheno.phenotypeMap.phenotypeMimNumber}}</span></td>
+                    <td><span ng-repeat="pheno in api.geneMap.phenotypeMapList">{{pheno.phenotypeMap.phenotypeMappingKey}}</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <h3>Text</h3>
+
+        <div ng-repeat="text in api.textSectionList">
+            <h4 class="omim-h4">{{text.textSection.textSectionTitle}}</h4>
+            <div class="omim-text"  ng-init="omimText($index, text.textSection.textSectionContent, 0)" ng-bind-html="omimNewText[$index]"></div>
+            <br/>
+
+        </div>
+
+        <h3>Variant List</h3>
+
+        <div ng-repeat="varList in api.allelicVariantList">
+            <h4 class="omim-h4">{{$index + 1}} - {{varList.allelicVariant.name}}</h4>
+            <p class="omim-text">{{varList.allelicVariant.mutations}}</p>
+            <div class="omim-text"   ng-init="omimText($index, varList.allelicVariant.text, 1)" ng-bind-html="omimNewVar[$index]"></div>
+            <p class="omim-text">dbSnps: {{varList.allelicVariant.dbSnps}}</p>
+            <br/>
+        </div>
+
+        <h3>Reference List</h3>
+
+        <table class="table">
+            <tbody>
+                <tr ng-repeat="ref in api.referenceList">
+                    <td>{{ref.reference.referenceNumber}}</td>
+                    <td>
+                        <p class="omim-ref-left">Authors:</p><p class="omim-ref-right">{{ref.reference.authors}}</p>
+                        <p class="omim-ref-left">Title:</p><p class="omim-ref-right">{{ref.reference.title}}</p>
+                        <p class="omim-ref-left">Info:</p><p class="omim-ref-right">{{ref.reference.articleUrl}}, {{ref.reference.publisherName}}, {{ref.reference.publisherUrl}}, {{ref.reference.source}}</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        {{api.contributors}}
+        {{api.creationDate}}
+
+    </div>
+    <div ng-show="api === 'noOmim'">
+        This variant has no OMIM id reference. 
+    </div>
+
+</section>
