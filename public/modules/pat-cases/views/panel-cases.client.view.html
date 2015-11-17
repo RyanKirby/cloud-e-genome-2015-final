@@ -13,12 +13,9 @@
                             getCaseInvs(currentCase);
                             viewCase(true)">
                     <span class="case-box-header">{{patCase.case_name}}</span>
-
                     <p class="case-box-content">
                         Patient: {{patCase.patient_id.pat_name}}, created on the {{patCase.created| date:default}}
                     </p>
-                   
-
                 </div>
             </div>
             <div ng-show="patCases.length === 0">
@@ -52,24 +49,24 @@
                                     {{patient.name}}
                                 </p>
 
-                                                                <table st-table="pats" st-safe-src="pats" class="table table-striped">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th st-sort="name">Name</th>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th>
-                                                                                <input st-search class="input-sm form-control" placeholder="global search..." type="search"/>
-                                                                            </th>
-                                                                        </tr>
-                                
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr ng-repeat="patient in pats">
-                                                                            <td><a ng-click="selCurrentPatient(patient)" href="">{{patient.name}}</a></td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
+                                <table st-table="pats" st-safe-src="pats" class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th st-sort="name">Name</th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <input st-search class="input-sm form-control" placeholder="global search..." type="search"/>
+                                            </th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="patient in pats">
+                                            <td><a ng-click="selCurrentPatient(patient)" href="">{{patient.name}}</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
 
 
 
